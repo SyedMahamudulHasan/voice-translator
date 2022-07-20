@@ -19,7 +19,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   TranslateProvider? _translateProvider;
   final _speech = stt.SpeechToText();
   Timer? _timer;
-  String _speechText = "";
+  String? _speechText;
 
   @override
   void initState() {
@@ -65,8 +65,25 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   /// This is the callback that the SpeechToText plugin calls when
   /// the platform returns recognized words.
   void _onSpeechResult(SpeechRecognitionResult result) {
+    if (!result.finalResult && _speech.lastStatus != "notListening") {
+      _startTime();
+    }
     setState(() {
       _speechText = result.recognizedWords;
+      print(_speechText);
+    });
+  }
+
+  _startTime() {
+    if (_timer != null) {
+      _timer?.cancel();
+    }
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (timer.tick == 3) {
+        timer.cancel();
+        _speech.stop();
+        //Navigator.pop(context, _speechText);
+      }
     });
   }
 
@@ -80,12 +97,19 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
               width: double.infinity,
               padding:
                   const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-              child: Text('Enter Text'),
+              child: Text(
+                _speechText ?? "Talk Now",
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 22,
+                ),
+              ),
             ),
           ),
-          Expanded(child: Text('Output')),
+          Container(),
           const ChooseLanguage(),
-          Expanded(child: Text('Speaker')),
+          RecordButton()
         ],
       ),
     );
