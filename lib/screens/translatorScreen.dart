@@ -107,8 +107,11 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     setState(() {
       _translation;
       _isTranlated = true;
+      _isRecording = false;
     });
   }
+
+  bool _isRecording = true;
 
   @override
   Widget build(BuildContext context) {
@@ -152,12 +155,15 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
               ),
             ),
             const ChooseLanguage(),
-            // RecordButton(
-            //   isActive: true,
-            //   onPressed: (isActive) {
-            //     _stopListening();
-            //   },
-            // )
+            _isRecording
+                ? RecorderButton(
+                    iconData: Icons.mic,
+                    color: Colors.deepOrangeAccent.shade700.withOpacity(0.5),
+                  )
+                : RecorderButton(
+                    iconData: Icons.replay,
+                    color: Colors.green.shade900.withOpacity(0.5),
+                  ),
           ],
         ),
       ),
