@@ -28,40 +28,44 @@ class HistoryScreen extends StatelessWidget {
                 ),
               ),
             )
-          : ListView.builder(itemBuilder: (context, index) {
-              return Container(
-                padding: const EdgeInsets.all(10),
-                width: size.width,
-                // height: size.height * 0.20,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: ListTile(
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Text("I love my country"),
-                      Text("ami amar deshke valobashi"),
-                      SizedBox(
-                        height: 10,
-                      )
-                    ],
+          : ListView.builder(
+              itemCount: _appController.historyListLength,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
+                  width: size.width,
+                  // height: size.height * 0.20,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  subtitle: Row(
-                    children: [
-                      const Text('English to Bangla'),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(formattedDate),
-                    ],
+                  child: ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(_appController.historyList[index]['textSpeech']),
+                        Text(_appController.historyList[index]
+                            ['translatedSpeech']),
+                        const SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    ),
+                    subtitle: Row(
+                      children: [
+                        const Text('English to Bangla'),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(formattedDate),
+                      ],
+                    ),
+                    trailing: const Icon(Icons.star_border_outlined),
                   ),
-                  trailing: const Icon(Icons.star_border_outlined),
-                ),
-              );
-            });
+                );
+              });
     }));
   }
 }

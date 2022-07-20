@@ -154,11 +154,16 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
               ? RecorderButton(
                   iconData: Icons.mic_off,
                   color: Colors.green.shade900.withOpacity(0.5),
-                  onClick: _stopListening())
+                  onClick: _stopListening(),
+                  speechText: _speechText,
+                  TranslateText: _translation.toString(),
+                )
               : RecorderButton(
                   iconData: Icons.mic,
                   color: Colors.deepOrangeAccent.shade700.withOpacity(0.5),
                   onClick: _startListening(),
+                  speechText: _speechText,
+                  TranslateText: _translation.toString(),
                 ),
         ],
       ),

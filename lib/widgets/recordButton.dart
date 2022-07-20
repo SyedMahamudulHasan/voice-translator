@@ -1,23 +1,24 @@
-import 'package:edvive_task1_syed_mahamudul_hasan/screens/dashScreen.dart';
-import 'package:edvive_task1_syed_mahamudul_hasan/screens/translatorScreen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:edvive_task1_syed_mahamudul_hasan/models/appcontroller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
-class RecorderButton extends StatefulWidget {
-  const RecorderButton(
-      {Key? key, required this.color, required this.iconData, this.onClick})
+class RecorderButton extends StatelessWidget {
+  RecorderButton(
+      {Key? key,
+      required this.color,
+      required this.iconData,
+      this.onClick,
+      this.speechText,
+      this.TranslateText})
       : super(key: key);
   final Color color;
   final IconData iconData;
+  final speechText;
+  final TranslateText;
   final Future<void>? onClick;
 
-  @override
-  State<RecorderButton> createState() => _RecorderButtonState();
-}
+  final AppController _appController = Get.put(AppController());
 
-class _RecorderButtonState extends State<RecorderButton> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -25,18 +26,17 @@ class _RecorderButtonState extends State<RecorderButton> {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: widget.color,
+        color: color,
       ),
       child: RawMaterialButton(
         onPressed: () {
-          widget.onClick;
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => DashScreen()));
+          _appController.addHistiry(speechText, TranslateText);
+          onClick;
         },
         fillColor: Colors.white,
         shape: const CircleBorder(),
         padding: const EdgeInsets.all(20),
-        child: Icon(widget.iconData),
+        child: Icon(iconData),
       ),
     );
   }
