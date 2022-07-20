@@ -29,7 +29,7 @@ class _DashScreenState extends State<DashScreen> {
               size: 30,
             ),
             Icon(
-              Icons.record_voice_over_sharp,
+              Icons.mic,
               size: 30,
             ),
           ],

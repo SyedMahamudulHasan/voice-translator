@@ -2,11 +2,14 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import '../models/appcontroller.dart';
 import '../widgets/choose_language.dart';
+import '../widgets/recordButton.dart';
 
 class TranslatorScreen extends StatefulWidget {
   const TranslatorScreen({Key? key}) : super(key: key);
@@ -87,30 +90,46 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     });
   }
 
+  void _stopListening() async {
+    await _speech.stop();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    _translateProvider = Provider.of<TranslateProvider>(context, listen: true);
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-              child: Text(
-                _speechText ?? "Talk Now",
-                style: const TextStyle(
-                  color: Colors.black54,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 22,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                child: Text(
+                  _speechText ?? "Talk Now",
+                  style: const TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 22,
+                  ),
                 ),
               ),
             ),
-          ),
-          Container(),
-          const ChooseLanguage(),
-          RecordButton()
-        ],
+            Container(),
+            const ChooseLanguage(),
+            Expanded(
+              child: RecordButton(
+                isActive: true,
+                onPressed: (isActive) {
+                  _stopListening();
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
