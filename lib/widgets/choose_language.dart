@@ -15,7 +15,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.15,
+      height: size.height * 0.10,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:translator/translator.dart';
 import '../models/appcontroller.dart';
 import '../widgets/choose_language.dart';
 import '../widgets/recordButton.dart';
@@ -85,6 +86,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
       if (timer.tick == 3) {
         timer.cancel();
         _speech.stop();
+        _translateSpeech();
         //Navigator.pop(context, _speechText);
       }
     });
@@ -95,6 +97,17 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     setState(() {});
   }
 
+  final translator = GoogleTranslator();
+  var _translation;
+
+  Future<void> _translateSpeech() async {
+    _translation =
+        await translator.translate(_speechText!, from: 'en', to: 'bn');
+    setState(() {
+      _translation;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     _translateProvider = Provider.of<TranslateProvider>(context, listen: true);
@@ -103,31 +116,44 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
         value: SystemUiOverlayStyle.dark,
         child: Column(
           children: [
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-                child: Text(
-                  _speechText ?? "Talk Now",
-                  style: const TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w300,
-                    fontSize: 22,
-                  ),
+            Container(
+              width: double.infinity,
+              padding:
+                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+              child: Text(
+                _speechText ?? "Talk Now",
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 22,
                 ),
               ),
             ),
-            Container(),
-            const ChooseLanguage(),
-            Expanded(
-              child: RecordButton(
-                isActive: true,
-                onPressed: (isActive) {
-                  _stopListening();
-                },
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.only(
+                  left: 16.0, right: 16.0, top: 16.0, bottom: 20.0),
+              child: Text(
+                _translation.toString() ?? "Translating",
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 22,
+                ),
               ),
-            )
+            ),
+            const ChooseLanguage(),
+            // Expanded(
+            //   child: RecordButton(
+            //     isActive: true,
+            //     onPressed: (isActive) {
+            //       _stopListening();
+            //     },
+            //   ),
+            // )
           ],
         ),
       ),
