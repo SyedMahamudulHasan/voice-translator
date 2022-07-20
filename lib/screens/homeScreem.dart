@@ -87,23 +87,24 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-  InkWell chooseMethod() {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        height: 100,
-        width: 80,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: Colors.blueAccent,
-            )),
-        child: Column(children: [
-          Image.network('https://static.thenounproject.com/png/66759-200.png'),
-          const Text('Text')
-        ]),
-      ),
-    );
-  }
 }
+
+//   InkWell chooseMethod() {
+//     return InkWell(
+//       onTap: () {},
+//       child: Container(
+//         height: 100,
+//         width: 80,
+//         decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(20),
+//             border: Border.all(
+//               color: Colors.blueAccent,
+//             )),
+//         child: Column(children: [
+//           Image.network('https://static.thenounproject.com/png/66759-200.png'),
+//           const Text('Text')
+//         ]),
+//       ),
+//     );
+//   }
+// }
