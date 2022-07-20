@@ -47,5 +47,3 @@ class RecorderButton extends StatelessWidget {
     );
   }
 }
-
-//Color.fromARGB(255, 98, 93, 93),
