@@ -152,13 +152,11 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
               ),
             ),
             const ChooseLanguage(),
-            // Expanded(
-            //   child: RecordButton(
-            //     isActive: true,
-            //     onPressed: (isActive) {
-            //       _stopListening();
-            //     },
-            //   ),
+            // RecordButton(
+            //   isActive: true,
+            //   onPressed: (isActive) {
+            //     _stopListening();
+            //   },
             // )
           ],
         ),
