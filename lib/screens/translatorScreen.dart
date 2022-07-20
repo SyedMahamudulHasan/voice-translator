@@ -91,7 +91,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     });
   }
 
-  void _stopListening() async {
+  Future<void> _stopListening() async {
     await _speech.stop();
     setState(() {});
   }
@@ -150,16 +150,15 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.10,
           ),
-          _speech.isListening
+          _speech.isNotListening
               ? RecorderButton(
-                  iconData: Icons.mic,
-                  color: Colors.deepOrangeAccent.shade700.withOpacity(0.5),
-                  //onClick: _initSpeech(),
-                )
-              : RecorderButton(
                   iconData: Icons.mic_off,
                   color: Colors.green.shade900.withOpacity(0.5),
-                  //onClick: _initSpeech,
+                  onClick: _stopListening())
+              : RecorderButton(
+                  iconData: Icons.mic,
+                  color: Colors.deepOrangeAccent.shade700.withOpacity(0.5),
+                  onClick: _startListening(),
                 ),
         ],
       ),

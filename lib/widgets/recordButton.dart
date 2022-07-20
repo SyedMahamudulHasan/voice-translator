@@ -29,6 +29,7 @@ class _RecorderButtonState extends State<RecorderButton> {
       ),
       child: RawMaterialButton(
         onPressed: () {
+          widget.onClick;
           // Navigator.push(
           //     context, MaterialPageRoute(builder: (context) => DashScreen()));
         },

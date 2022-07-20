@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edvive_task1_syed_mahamudul_hasan/screens/translatorScreen.dart';
 import 'package:flutter/material.dart';
+import 'history_screen.dart';
 import 'homeScreem.dart';
 
 class DashScreen extends StatefulWidget {
@@ -13,9 +14,10 @@ class DashScreen extends StatefulWidget {
 class _DashScreenState extends State<DashScreen> {
   int _page = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-  final List<Widget> screens = const [
+  final List<Widget> screens = [
     HomeScreen(),
     TranslatorScreen(),
+    HistoryScreen(),
   ];
 
   @override
@@ -30,6 +32,10 @@ class _DashScreenState extends State<DashScreen> {
             ),
             Icon(
               Icons.mic,
+              size: 30,
+            ),
+            Icon(
+              Icons.history_outlined,
               size: 30,
             ),
           ],
