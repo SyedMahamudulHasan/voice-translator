@@ -99,12 +99,14 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
 
   final translator = GoogleTranslator();
   var _translation;
+  bool _isTranlated = false;
 
   Future<void> _translateSpeech() async {
     _translation =
         await translator.translate(_speechText!, from: 'en', to: 'bn');
     setState(() {
       _translation;
+      _isTranlated = true;
     });
   }
 
@@ -118,8 +120,12 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           children: [
             Container(
               width: double.infinity,
-              padding:
-                  const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                top: 16.0,
+                bottom: 20.0,
+              ),
               child: Text(
                 _speechText ?? "Talk Now",
                 style: const TextStyle(
@@ -129,7 +135,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                 ),
               ),
             ),
-            const SizedBox(
+            const Divider(
               height: 10,
             ),
             Container(
@@ -137,7 +143,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
               padding: const EdgeInsets.only(
                   left: 16.0, right: 16.0, top: 16.0, bottom: 20.0),
               child: Text(
-                _translation.toString() ?? "Translating",
+                _isTranlated ? _translation.toString() : "Translating...",
                 style: const TextStyle(
                   color: Colors.black54,
                   fontWeight: FontWeight.w300,
