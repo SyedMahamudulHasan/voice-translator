@@ -35,6 +35,9 @@ class RecorderButton extends StatelessWidget {
         onPressed: () {
           if (speechText != null && TranslateText != null) {
             _appController.addHistiry(speechText, TranslateText, formattedDate);
+            Get.snackbar('Saved Data', 'Data is saved to history',
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.tealAccent);
           }
 
           onClick;
