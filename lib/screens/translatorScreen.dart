@@ -87,7 +87,6 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
         timer.cancel();
         _speech.stop();
         _translateSpeech();
-        //Navigator.pop(context, _speechText);
       }
     });
   }
@@ -123,6 +122,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           children: [
             Container(
               width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.15,
               padding: const EdgeInsets.only(
                 left: 16.0,
                 right: 16.0,
@@ -130,7 +130,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                 bottom: 20.0,
               ),
               child: Text(
-                _speechText ?? "Talk Now",
+                _speechText ?? "Listening...",
                 style: const TextStyle(
                   color: Colors.black54,
                   fontWeight: FontWeight.w300,
@@ -143,6 +143,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
             ),
             Container(
               width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.15,
               padding: const EdgeInsets.only(
                   left: 16.0, right: 16.0, top: 16.0, bottom: 20.0),
               child: Text(
@@ -155,6 +156,9 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
               ),
             ),
             const ChooseLanguage(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.10,
+            ),
             _isRecording
                 ? RecorderButton(
                     iconData: Icons.mic,
