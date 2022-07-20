@@ -10,12 +10,12 @@ class ChooseLanguage extends StatefulWidget {
 
 class _ChooseLanguageState extends State<ChooseLanguage> {
   final _firstLanguage = "English";
-  final _secondLanguage = "French";
+  final _secondLanguage = "Bangla";
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.20,
+      height: size.height * 0.15,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(

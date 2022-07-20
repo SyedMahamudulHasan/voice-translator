@@ -15,11 +15,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Translator'),
+        title: const Text("Flutter Translator"),
       ),
       body: Column(
         children: [
+          Expanded(child: Text('Input')),
+          Expanded(child: Text('Output')),
           const ChooseLanguage(),
+          Expanded(child: Text('Speaker')),
         ],
       ),
     );
