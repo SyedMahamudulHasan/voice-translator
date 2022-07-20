@@ -23,7 +23,6 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   Timer? _timer;
   String? _speechText;
 
-  bool _isRecording = true;
   final translator = GoogleTranslator();
   var _translation;
   bool _isTranlated = false;
@@ -104,7 +103,6 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
       _translation;
       // _translateProvider?.isTranslating = true;
       _isTranlated = true;
-      _isRecording = false;
     });
   }
 
@@ -152,18 +150,17 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.10,
           ),
-          if (_isRecording)
-            RecorderButton(
-              iconData: Icons.mic,
-              color: Colors.deepOrangeAccent.shade700.withOpacity(0.5),
-              //onClick: _initSpeech(),
-            )
-          else
-            RecorderButton(
-              iconData: Icons.replay,
-              color: Colors.green.shade900.withOpacity(0.5),
-              //onClick: _initSpeech,
-            ),
+          _speech.isListening
+              ? RecorderButton(
+                  iconData: Icons.mic,
+                  color: Colors.deepOrangeAccent.shade700.withOpacity(0.5),
+                  //onClick: _initSpeech(),
+                )
+              : RecorderButton(
+                  iconData: Icons.mic_off,
+                  color: Colors.green.shade900.withOpacity(0.5),
+                  //onClick: _initSpeech,
+                ),
         ],
       ),
     );

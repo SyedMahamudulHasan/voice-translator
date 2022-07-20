@@ -29,8 +29,8 @@ class _RecorderButtonState extends State<RecorderButton> {
       ),
       child: RawMaterialButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => DashScreen()));
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => DashScreen()));
         },
         fillColor: Colors.white,
         shape: const CircleBorder(),
