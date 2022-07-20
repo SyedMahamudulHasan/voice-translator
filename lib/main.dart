@@ -1,4 +1,5 @@
 import 'package:edvive_task1_syed_mahamudul_hasan/screens/dashScreen.dart';
+import 'package:edvive_task1_syed_mahamudul_hasan/screens/translatorScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

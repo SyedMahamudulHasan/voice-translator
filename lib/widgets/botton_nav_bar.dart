@@ -1,15 +1,22 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:edvive_task1_syed_mahamudul_hasan/screens/homeScreem.dart';
+import 'package:edvive_task1_syed_mahamudul_hasan/screens/translatorScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BottonNavBar extends StatelessWidget {
-  const BottonNavBar({Key? key}) : super(key: key);
+  BottonNavBar({Key? key}) : super(key: key);
+
+  final int _page = 0;
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  final List<Widget> screens = const [
+    HomeScreen(),
+    TranslatorScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
+      key: _bottomNavigationKey,
       items: const [
         Icon(
           Icons.home_outlined,
@@ -22,6 +29,11 @@ class BottonNavBar extends StatelessWidget {
       ],
       onTap: (index) {
         print(index);
+        if (index == 0) {
+          Navigator.pushNamed(context, '/translator');
+        } else {
+          Navigator.pop(context);
+        }
       },
     );
   }
