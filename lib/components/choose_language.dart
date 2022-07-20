@@ -27,24 +27,39 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
       ),
       child: Row(
         children: [
-          Expanded(
-            child: Material(
-              color: Colors.white,
-              child: InkWell(
-                onTap: () {},
-                child: Center(
-                  child: Text(
-                    _firstLanguage,
-                    style: TextStyle(
-                      color: Colors.blue.shade600,
-                      fontSize: 15.0,
-                    ),
-                  ),
-                ),
+          languageButton(_firstLanguage),
+          Material(
+            color: Colors.white,
+            child: IconButton(
+              icon: Icon(
+                Icons.compare_arrows,
+                color: Colors.grey.shade700,
+              ),
+              onPressed: () {},
+            ),
+          ),
+          languageButton(_secondLanguage)
+        ],
+      ),
+    );
+  }
+
+  Expanded languageButton(String language) {
+    return Expanded(
+      child: Material(
+        color: Colors.white,
+        child: InkWell(
+          onTap: () {},
+          child: Center(
+            child: Text(
+              language,
+              style: TextStyle(
+                color: Colors.blue.shade600,
+                fontSize: 15.0,
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
