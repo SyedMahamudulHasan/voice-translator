@@ -8,9 +8,6 @@ class HistoryScreen extends StatelessWidget {
 
   final AppController _appController = Get.put(AppController());
 
-  String formattedDate =
-      DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -59,7 +56,7 @@ class HistoryScreen extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                        Text(formattedDate),
+                        Text(_appController.historyList[index]['time']),
                       ],
                     ),
                     trailing: const Icon(Icons.star_border_outlined),

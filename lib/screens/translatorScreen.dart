@@ -151,19 +151,26 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
             height: MediaQuery.of(context).size.height * 0.10,
           ),
           _speech.isNotListening
-              ? RecorderButton(
-                  iconData: Icons.mic_off,
-                  color: Colors.green.shade900.withOpacity(0.5),
-                  onClick: _stopListening(),
-                  speechText: _speechText,
-                  TranslateText: _translation.toString(),
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RecorderButton(
+                      iconData: Icons.mic_off,
+                      color: Colors.green.shade900.withOpacity(0.5),
+                      onClick: _stopListening(),
+                    ),
+                    RecorderButton(
+                      color: Colors.grey.shade100,
+                      iconData: Icons.history_outlined,
+                      speechText: _speechText,
+                      TranslateText: _translation.toString(),
+                    )
+                  ],
                 )
               : RecorderButton(
                   iconData: Icons.mic,
                   color: Colors.deepOrangeAccent.shade700.withOpacity(0.5),
                   onClick: _startListening(),
-                  speechText: _speechText,
-                  TranslateText: _translation.toString(),
                 ),
         ],
       ),

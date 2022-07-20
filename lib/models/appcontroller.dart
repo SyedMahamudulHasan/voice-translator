@@ -7,10 +7,11 @@ class AppController extends GetxController {
 
   int get historyListLength => historyList.length;
 
-  void addHistiry(String textSpeech, String translatedSpeech) {
+  void addHistiry(String textSpeech, String translatedSpeech, String dateTime) {
     historyList.add({
       "textSpeech": textSpeech,
       "translatedSpeech": translatedSpeech,
+      "time": dateTime
     });
   }
 }

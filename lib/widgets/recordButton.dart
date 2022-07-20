@@ -1,6 +1,7 @@
 import 'package:edvive_task1_syed_mahamudul_hasan/models/appcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class RecorderButton extends StatelessWidget {
   RecorderButton(
@@ -18,6 +19,8 @@ class RecorderButton extends StatelessWidget {
   final Future<void>? onClick;
 
   final AppController _appController = Get.put(AppController());
+  String formattedDate =
+      DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,10 @@ class RecorderButton extends StatelessWidget {
       ),
       child: RawMaterialButton(
         onPressed: () {
-          _appController.addHistiry(speechText, TranslateText);
+          if (speechText != null && TranslateText != null) {
+            _appController.addHistiry(speechText, TranslateText, formattedDate);
+          }
+
           onClick;
         },
         fillColor: Colors.white,
