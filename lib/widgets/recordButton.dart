@@ -16,7 +16,7 @@ class RecorderButton extends StatelessWidget {
   final IconData iconData;
   final speechText;
   final TranslateText;
-  final Future<void>? onClick;
+  dynamic onClick;
 
   final AppController _appController = Get.put(AppController());
   String formattedDate =
@@ -40,7 +40,7 @@ class RecorderButton extends StatelessWidget {
                 backgroundColor: Colors.tealAccent);
           }
 
-          onClick;
+          if (onClick != null) onClick();
         },
         fillColor: Colors.white,
         shape: const CircleBorder(),

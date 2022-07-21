@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChooseLanguage extends StatefulWidget {
   const ChooseLanguage({Key? key}) : super(key: key);
@@ -35,7 +35,12 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                 Icons.compare_arrows,
                 color: Colors.grey.shade700,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.snackbar(
+                    'Error message', 'Language switching is comeing soon...',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.tealAccent);
+              },
             ),
           ),
           languageButton(_secondLanguage)
@@ -49,7 +54,12 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
       child: Material(
         color: Colors.white,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.snackbar(
+                'Error message', 'Language switching is comeing soon...',
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.tealAccent);
+          },
           child: Center(
             child: Text(
               language,

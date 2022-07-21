@@ -1,7 +1,6 @@
 import 'package:edvive_task1_syed_mahamudul_hasan/models/appcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class HistoryScreen extends StatelessWidget {
   HistoryScreen({Key? key}) : super(key: key);

@@ -115,7 +115,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           backgroundColor: Colors.tealAccent);
     }
     _translation = await translator.translate(
-        _speechText ?? "something went wrong, please wait or try again",
+        _speechText ?? "Sorry i didn't hear you.",
         from: 'en',
         to: 'bn');
     setState(() {
@@ -181,7 +181,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                     RecorderButton(
                       iconData: Icons.mic_off,
                       color: Colors.green.shade900.withOpacity(0.5),
-                      onClick: _stopListening(),
+                      onClick: _stopListening,
                     ),
                     RecorderButton(
                       color: Colors.grey.shade100,
@@ -194,7 +194,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
               : RecorderButton(
                   iconData: Icons.mic,
                   color: Colors.deepOrangeAccent.shade700.withOpacity(0.5),
-                  onClick: _startListening(),
+                  onClick: _startListening,
                 ),
         ],
       ),
