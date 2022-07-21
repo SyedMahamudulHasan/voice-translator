@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -41,18 +42,20 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     super.deactivate();
   }
 
+  /// initiating  speech to talk
   Future<void> _initSpeech() async {
     bool available = await _speech.initialize(
         onStatus: _statusListener, onError: _errorListener);
 
     if (available) {
-      // _startTimer();
+      _startTimer();
       _startListening();
     } else {
       print('Something went wrong');
     }
   }
 
+  ///printing some status and error msg from initspeech.
   void _errorListener(SpeechRecognitionError error) {
     print("${error.errorMsg} - ${error.permanent}");
   }
@@ -61,6 +64,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     print("status - $status");
   }
 
+  /// Each time to start a speech recognition session
   Future<void> _startListening() async {
     await _speech.listen(onResult: _onSpeechResult, localeId: 'en');
     setState(() {});
@@ -70,7 +74,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   /// the platform returns recognized words.
   void _onSpeechResult(SpeechRecognitionResult result) {
     if (!result.finalResult && _speech.lastStatus != "notListening") {
-      _startTime();
+      _startTimer();
     }
     setState(() {
       _speechText = result.recognizedWords;
@@ -78,7 +82,8 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     });
   }
 
-  _startTime() {
+  ///using timer to recoall the speech and stop it dynamicaly.
+  _startTimer() {
     if (_timer != null) {
       _timer?.cancel();
     }
@@ -91,14 +96,28 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     });
   }
 
+// Manually stop the active speech recognition session
+  /// Note that there are also timeouts that each platform enforces
+  /// and the SpeechToText plugin supports setting timeouts on the
+  /// listen method.
   Future<void> _stopListening() async {
     await _speech.stop();
     setState(() {});
   }
 
+  ///translating what we record from mic.
   Future<void> _translateSpeech() async {
-    _translation =
-        await translator.translate(_speechText!, from: 'en', to: 'bn');
+    ///show snackbar if error
+    if (_speechText == null) {
+      Get.snackbar('Error Message',
+          'Plsease reload the page and speek what you need to translate',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.tealAccent);
+    }
+    _translation = await translator.translate(
+        _speechText ?? "something went wrong, please wait or try again",
+        from: 'en',
+        to: 'bn');
     setState(() {
       _translation;
       // _translateProvider?.isTranslating = true;
@@ -111,6 +130,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     return Scaffold(
       body: Column(
         children: [
+          ///===============================================> speek text
           Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.15,
@@ -132,6 +152,8 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           const Divider(
             height: 10,
           ),
+
+          ///===================================================> translated text
           Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.15,
@@ -150,6 +172,8 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.10,
           ),
+
+          ///=========================================================> bottom button
           _speech.isNotListening
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
