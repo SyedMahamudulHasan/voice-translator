@@ -13,6 +13,8 @@ class HistoryScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(body: Obx(() {
       return _appController.historyListLength == 0
+
+          ///=======================================================>empty list ui part
           ? const Padding(
               padding: EdgeInsets.all(8.0),
               child: Center(
@@ -25,11 +27,13 @@ class HistoryScreen extends StatelessWidget {
                 ),
               ),
             )
+
+          ///=======================================================>showing the hestory list
           : ListView.builder(
               itemCount: _appController.historyListLength,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   padding: const EdgeInsets.all(10),
                   width: size.width,
                   // height: size.height * 0.20,

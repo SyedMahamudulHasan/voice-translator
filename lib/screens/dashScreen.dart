@@ -14,6 +14,8 @@ class DashScreen extends StatefulWidget {
 class _DashScreenState extends State<DashScreen> {
   int _page = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+
+  ///screens list to navigate
   final List<Widget> screens = [
     const HomeScreen(),
     const TranslatorScreen(),

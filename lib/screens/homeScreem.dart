@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ///=============================================>top blue design part
           Container(
             padding: const EdgeInsets.only(
               top: 40,
@@ -55,13 +56,15 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+
+          ///==================================================>white blank part
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(14),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
+                  topLeft: Radius.circular(50),
                 ),
               ),
               // child: Column(
