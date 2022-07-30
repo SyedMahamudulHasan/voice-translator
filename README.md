@@ -1,4 +1,4 @@
-# edvive_task1_syed_mahamudul_hasan
+# voice translator using flutter
 
 A new Flutter project.
 
